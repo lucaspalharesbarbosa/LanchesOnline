@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LanchesOnline.Migrations
 {
     [DbContext(typeof(LanchesOnlineContext))]
-    [Migration("20200804013914_Initial Migration")]
+    [Migration("20200804022449_Initial Migration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
