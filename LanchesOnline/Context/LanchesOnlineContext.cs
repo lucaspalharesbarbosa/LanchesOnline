@@ -9,9 +9,9 @@ namespace LanchesOnline.Context {
         public DbSet<CategoriaLanche> CategoriasLanches { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
-            modelBuilder.Entity<CategoriaLanche>()
-                .HasMany(categoria => categoria.Lanches)
-                .WithOne(lanche => lanche.Categoria)
+            modelBuilder.Entity<Lanche>()
+                .HasOne(lanche => lanche.Categoria)
+                .WithMany(categoria => categoria.Lanches)
                 .HasForeignKey(lanche => lanche.IdCategoria);
         }
     }
