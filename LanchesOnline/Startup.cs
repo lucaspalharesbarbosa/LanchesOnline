@@ -1,10 +1,13 @@
 using LanchesOnline.Context;
+using LanchesOnline.Repositories;
+using LanchesOnline.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace LanchesOnline {
     public class Startup {
@@ -20,6 +23,13 @@ namespace LanchesOnline {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllersWithViews();
+
+            RegistrarInterfacesParaInjecaoDependencia(services);
+        }
+
+        private void RegistrarInterfacesParaInjecaoDependencia(IServiceCollection services) {
+            services.AddTransient<ICategoriaLancheRepository, CategoriaLancheRepository>();
+            services.AddTransient<ILancheRepository, LancheRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
