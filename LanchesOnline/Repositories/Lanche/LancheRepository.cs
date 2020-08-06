@@ -17,9 +17,9 @@ namespace LanchesOnline.Repositories {
             return _db.Lanches.FirstOrDefault(lanche => lanche.Id == id);
         }
 
-        public IEnumerable<Lanche> ObterLanches => _db.Lanches.Include(lanche => lanche.Categoria).ToArray();
+        public IEnumerable<Lanche> Lanches => _db.Lanches.Include(lanche => lanche.Categoria);
 
-        public IEnumerable<Lanche> ObterLanchesPreferidos => _db.Lanches.Where(lanche => lanche.EhLanchePreferido).ToArray();
+        public IEnumerable<Lanche> LanchesPreferidos => _db.Lanches.Where(lanche => lanche.EhLanchePreferido);
        
     }
 }
