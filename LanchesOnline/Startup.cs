@@ -1,8 +1,10 @@
 using LanchesOnline.Context;
+using LanchesOnline.Models;
 using LanchesOnline.Repositories;
 using LanchesOnline.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,14 +24,16 @@ namespace LanchesOnline {
             services.AddDbContext<LanchesOnlineContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddControllersWithViews();
-
             RegistrarInterfacesParaInjecaoDependencia(services);
+
+            services.AddScoped(serviceProvider => CarrinhoCompra.ObterCarrinhoCompra(serviceProvider));
+            services.AddControllersWithViews();
         }
 
         private void RegistrarInterfacesParaInjecaoDependencia(IServiceCollection services) {
             services.AddTransient<ICategoriaLancheRepository, CategoriaLancheRepository>();
             services.AddTransient<ILancheRepository, LancheRepository>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +47,9 @@ namespace LanchesOnline {
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            // Middleware para usar sessões.
+            app.UseSession();
 
             app.UseRouting();
 
