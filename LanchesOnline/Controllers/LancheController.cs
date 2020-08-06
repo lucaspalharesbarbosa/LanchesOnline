@@ -1,4 +1,5 @@
 ﻿using LanchesOnline.Repositories.Interfaces;
+using LanchesOnline.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LanchesOnline.Controllers {
@@ -12,12 +13,13 @@ namespace LanchesOnline.Controllers {
         }
 
         public IActionResult List() {
-            ViewBag.Lanche = "Lanches";
-            ViewData["Categoria"] = "Categoria";
+            //ViewBag.Lanche = "Lanches";
+            //ViewData["Categoria"] = "Categoria";
 
-            var lanches = _lancheRepository.Lanches;
-
-            return View(lanches);
+            return View(new LancheListViewModel {
+                Categoria = "Categoria atual",
+                Lanches = _lancheRepository.Lanches
+            });
         }
     }
 }
