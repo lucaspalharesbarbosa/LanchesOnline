@@ -13,6 +13,14 @@
     <Compile Remove="Migrations\20200804014508_PolularTabelas.Designer.cs" />
     <Compile Remove="Migrations\20200806011827_AddCarrinhoCompra.cs" />
     <Compile Remove="Migrations\20200806011827_AddCarrinhoCompra.Designer.cs" />
+    <Compile Remove="Migrations\20200806012244_AddCarrinhoCompra.cs" />
+    <Compile Remove="Migrations\20200806012244_AddCarrinhoCompra.Designer.cs" />
+    <Compile Remove="Migrations\20200806013700_AddCarrinhoCompra.cs" />
+    <Compile Remove="Migrations\20200806013700_AddCarrinhoCompra.Designer.cs" />
+    <Compile Remove="Migrations\20200806013721_AddItemCarrinhoCompra.cs" />
+    <Compile Remove="Migrations\20200806013721_AddItemCarrinhoCompra.Designer.cs" />
+    <Compile Remove="Migrations\20200806013827_AddItemCarrinhoCompra.cs" />
+    <Compile Remove="Migrations\20200806013827_AddItemCarrinhoCompra.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

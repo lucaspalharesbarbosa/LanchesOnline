@@ -7,7 +7,6 @@ namespace LanchesOnline.Context {
 
         public DbSet<Lanche> Lanches { get; set; }
         public DbSet<CategoriaLanche> CategoriasLanches { get; set; }
-        public DbSet<CarrinhoCompra> CarrinhosCompras { get; set; }
         public DbSet<ItemCarrinhoCompra> ItensCarrinhosCompras { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
@@ -15,11 +14,6 @@ namespace LanchesOnline.Context {
                 .HasOne(lanche => lanche.Categoria)
                 .WithMany(categoria => categoria.Lanches)
                 .HasForeignKey(lanche => lanche.IdCategoria);
-
-            modelBuilder.Entity<ItemCarrinhoCompra>()
-                .HasOne(item => item.CarrinhoCompra)
-                .WithMany(carrinho => carrinho.Itens)
-                .HasForeignKey(item => item.IdCarrinhoCompra);
 
             modelBuilder.Entity<ItemCarrinhoCompra>()
                 .HasOne(item => item.Lanche)
