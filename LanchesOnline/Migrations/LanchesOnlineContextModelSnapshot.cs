@@ -18,18 +18,6 @@ namespace LanchesOnline.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("LanchesOnline.Models.CarrinhoCompra", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CarrinhosCompras");
-                });
-
             modelBuilder.Entity("LanchesOnline.Models.CategoriaLanche", b =>
                 {
                     b.Property<int>("Id")
@@ -57,8 +45,8 @@ namespace LanchesOnline.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("IdCarrinhoCompra")
-                        .HasColumnType("int");
+                    b.Property<string>("IdCarrinhoCompra")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IdLanche")
                         .HasColumnType("int");
@@ -67,8 +55,6 @@ namespace LanchesOnline.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IdCarrinhoCompra");
 
                     b.HasIndex("IdLanche");
 
@@ -123,12 +109,6 @@ namespace LanchesOnline.Migrations
 
             modelBuilder.Entity("LanchesOnline.Models.ItemCarrinhoCompra", b =>
                 {
-                    b.HasOne("LanchesOnline.Models.CarrinhoCompra", "CarrinhoCompra")
-                        .WithMany("Itens")
-                        .HasForeignKey("IdCarrinhoCompra")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("LanchesOnline.Models.Lanche", "Lanche")
                         .WithMany("ItensCarrinhosComprasVinculados")
                         .HasForeignKey("IdLanche")

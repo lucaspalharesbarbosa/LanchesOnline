@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LanchesOnline.Models {
     [Table("ItensCarrinhosCompras")]
@@ -10,7 +11,6 @@ namespace LanchesOnline.Models {
 
         public int Quantidade { get; set; }
 
-        public int IdCarrinhoCompra { get; set; }
-        public CarrinhoCompra CarrinhoCompra { get; set; }
+        public string IdCarrinhoCompra { get; set; }
     }
 }

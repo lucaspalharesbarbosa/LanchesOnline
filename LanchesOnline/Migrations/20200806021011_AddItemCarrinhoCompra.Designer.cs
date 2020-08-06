@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LanchesOnline.Migrations
 {
     [DbContext(typeof(LanchesOnlineContext))]
-    [Migration("20200806012244_AddCarrinhoCompra")]
-    partial class AddCarrinhoCompra
+    [Migration("20200806021011_AddItemCarrinhoCompra")]
+    partial class AddItemCarrinhoCompra
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,18 +19,6 @@ namespace LanchesOnline.Migrations
                 .HasAnnotation("ProductVersion", "3.1.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("LanchesOnline.Models.CarrinhoCompra", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CarrinhosCompras");
-                });
 
             modelBuilder.Entity("LanchesOnline.Models.CategoriaLanche", b =>
                 {
@@ -59,8 +47,8 @@ namespace LanchesOnline.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("IdCarrinhoCompra")
-                        .HasColumnType("int");
+                    b.Property<string>("IdCarrinhoCompra")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IdLanche")
                         .HasColumnType("int");
@@ -69,8 +57,6 @@ namespace LanchesOnline.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IdCarrinhoCompra");
 
                     b.HasIndex("IdLanche");
 
@@ -125,12 +111,6 @@ namespace LanchesOnline.Migrations
 
             modelBuilder.Entity("LanchesOnline.Models.ItemCarrinhoCompra", b =>
                 {
-                    b.HasOne("LanchesOnline.Models.CarrinhoCompra", "CarrinhoCompra")
-                        .WithMany("Itens")
-                        .HasForeignKey("IdCarrinhoCompra")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("LanchesOnline.Models.Lanche", "Lanche")
                         .WithMany("ItensCarrinhosComprasVinculados")
                         .HasForeignKey("IdLanche")
