@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace LanchesOnline.Models {
     [Table("Lanches")]
@@ -29,7 +31,8 @@ namespace LanchesOnline.Models {
         public bool PossuiEstoque { get; set; }
 
         public int IdCategoria { get; set; }
-
         public CategoriaLanche Categoria { get; set; }
+
+        public IEnumerable<ItemCarrinhoCompra> ItensCarrinhosComprasVinculados { get; set; }
     }
 }
