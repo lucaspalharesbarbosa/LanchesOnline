@@ -20,8 +20,8 @@ namespace LanchesOnline.Models {
         public static CarrinhoCompra ObterCarrinhoCompra(IServiceProvider services) {
             // Define uma sessão acessendo o contexto atual.
             var session = services
-                .GetRequiredService<IHttpContextAccessor>()
-                ?.HttpContext
+                .GetRequiredService<IHttpContextAccessor>()?
+                .HttpContext
                 .Session;
 
             // Obtém um servico do tipo do nosso contexto.
@@ -75,7 +75,6 @@ namespace LanchesOnline.Models {
                 var possuiQuantidade = itemCarrinho.Quantidade > 1;
                 if (possuiQuantidade) {
                     reduzirQuantidade();
-                    
                 } else {
                     excluir();
                 }
