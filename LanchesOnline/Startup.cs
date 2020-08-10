@@ -50,6 +50,7 @@ namespace LanchesOnline {
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             // Middleware para usar sessões.
