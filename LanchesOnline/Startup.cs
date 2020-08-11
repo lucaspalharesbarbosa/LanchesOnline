@@ -27,7 +27,10 @@ namespace LanchesOnline {
             RegistrarInterfacesParaInjecaoDependencia(services);
 
             services.AddScoped(serviceProvider => CarrinhoCompra.ObterCarrinhoCompra(serviceProvider));
-            
+
+            // adiciona cache para a sessão. 
+            services.AddMemoryCache();
+
             // adiciona o serviço necessário para usar Session
             services.AddSession();
 
