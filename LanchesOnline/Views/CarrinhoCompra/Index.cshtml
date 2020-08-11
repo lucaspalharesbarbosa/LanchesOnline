@@ -1,0 +1,46 @@
+﻿@model CarrinhoCompraViewModel
+<div class="row form-check">
+    <h2>Seu carrinho de compras</h2>
+    <h4>Aqui estão os seus pedidos</h4>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Quantidade</th>
+                <th>Lanche</th>
+                <th class="text-right">Preço</th>
+                <th class="text-right">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CarrinhoCompra.Itens) {
+                <tr>
+                    <td class="text-center">@item.Quantidade</td>
+                    <td class="text-center">@item.Lanche.Nome</td>
+                    <td class="text-center">@item.Lanche.Preco.ToString("c")</td>
+                    <td class="text-center">@((@item.Lanche.Preco * @item.Quantidade).ToString("c"))</td>
+                    <td class="text-center"><a class="text-danger remove" href="#">content</a></td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Total:</td>
+                <td class="text-right">@Model.ValorTotal.ToString("c")</td>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="text-right">
+        <div class="btn-group">
+            <a class="btn btn-success" asp-controller="Pedido" asp-action="Checkout">Encerrar pedido</a>
+            <a class="btn-group">
+                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    Adicionar mais lanches<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a asp-controller="Lanche" asp-action="List" asp-route-categoria="Normal">Normal</a></li>
+                    <li><a asp-controller="Lanche" asp-action="List" asp-route-categoria="Natural">Natural</a></li>
+                </ul>
+            </a>
+        </div>
+    </div>
+</div>

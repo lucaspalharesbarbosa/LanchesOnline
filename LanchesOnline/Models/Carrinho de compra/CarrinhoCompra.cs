@@ -39,6 +39,11 @@ namespace LanchesOnline.Models {
         }
 
         public void AdicionarItem(Lanche lanche, int quantidade) {
+            var lancheNaoExiste = lanche == null;
+            if (lancheNaoExiste) {
+                return;
+            }
+
             var itemCarrinho = _db.ItensCarrinhosCompras
                 .SingleOrDefault(item => item.IdLanche == lanche.Id && item.IdCarrinhoCompra == Id);
 
@@ -65,10 +70,15 @@ namespace LanchesOnline.Models {
         }
 
         public int RemoverItem(Lanche lanche) {
+            var lancheNaoExiste = lanche == null;
+            if (lancheNaoExiste) {
+                return 0;
+            }
+
             var itemCarrinho = _db.ItensCarrinhosCompras
                 .SingleOrDefault(item => item.IdLanche == lanche.Id && item.IdCarrinhoCompra == Id);
 
-            var quantidadeLocal = 0;
+            var quantidadeRetorno = 0;
 
             var itemExiste = itemCarrinho != null;
             if (itemExiste) {
@@ -82,17 +92,17 @@ namespace LanchesOnline.Models {
 
             _db.SaveChanges();
 
-            return quantidadeLocal;
+            return quantidadeRetorno;
 
             void reduzirQuantidade() {
                 itemCarrinho.Quantidade--;
-                quantidadeLocal = itemCarrinho.Quantidade;
+                quantidadeRetorno = itemCarrinho.Quantidade;
             }
 
             void excluir() {
                 _db.ItensCarrinhosCompras.Remove(itemCarrinho);
             }
-        }
+        }   
 
         public List<ItemCarrinhoCompra> ObterListaItens() {
             return Itens ??= _db.ItensCarrinhosCompras
